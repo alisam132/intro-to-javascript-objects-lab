@@ -142,6 +142,8 @@ game.party.forEach(element => {
 
 console.log('answer for ex No. 8:',pokemonNames);
 
+
+
 /*
 Exercise 9
 1. Can you print out all the starter Pokémon from the `pokemon` array?
@@ -151,21 +153,20 @@ Exercise 9
 Solve Exercise 9 here:
 */
 
-let pekemonWithStarter = []
+let pokemonWithStarter = []
 
 function checkStarter(starter) {
-
-  if(pokemon.starter === starter){
-    
-    pekemonWithStarter.push(pokemon.name);
-
-  }
+  pokemon.forEach((poke)=> {
+    if (poke.starter === true) {
+      pokemonWithStarter.push(poke)
+    }
+  })
   
 }
 
 checkStarter(pokemon.starter)
 
-console.log('answer for ex No. 9',pekemonWithStarter);
+console.log('answer for ex No. 9',pokemonWithStarter);
 
 
 /*
@@ -180,13 +181,12 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 Solve Exercise 10 here:
 */
 
-function catchPokemon(pokemonObj) {
-  game.pokemonObj;
+game.catchPokemon = function (pokemonObj) {
+  game.party.push(pokemonObj);
 }
 
-catchPokemon(pokemon[8]);
+game.catchPokemon(pokemon[5]);
 
-console.log('===========================================================================================================================');
 console.log('answer for ex 10',game);
 
 
@@ -205,10 +205,19 @@ Solve Exercise 11 here:
 */
 
 
-function catchPokemon(pokemonObj) {
-  game.pokemonObj;
+game.catchPokemon = function (pokemonObj) {
+  
+  game.party.push(pokemonObj);
+  game.items.forEach((item)=>{
+    if (item['name'] === 'pokeball') {
+      item['quantity']--;
+    }
+  });
 }
 
+game.catchPokemon(pokemon[6]);
+
+console.log("answer for Ex No.", game.items);
 
 /*
 Exercise 12
@@ -252,18 +261,17 @@ Solve Exercise 13 here:
 
 const gymTally = {'completed':0, 'incompleted':0}
 
-function gymStatus(status) {
-  if (status === true) {
-    gymTally['completed'] += 1
-  }
-  else{
-    gymTally['incompleted'] += 1
-  }
+function gymStatus() {
+  game.gyms.forEach((gym)=>{
+    if (gym['completed'] === true) {
+      gymTally['completed']++;
+    }else{
+      gymTally['incompleted']++;
+    }
+  })
 }
-game.gyms.forEach((gym => {
-  gymStatus(gym);
-}))
 
+gymStatus();
 
 console.log('answer for ex 13', gymTally);
 
@@ -279,13 +287,13 @@ This method should:
 Solve Exercise 14 here:
 */
 
-function partyCount() {
+game.partyCount = function () {
   return game.party.length;
 }
 
-game.partyCount;
+// game.partyCount;
 
-console.log('answer for ex 14',game);
+console.log('answer for ex 14',game.partyCount());
 
 
 /*
